@@ -15,6 +15,7 @@ const Products = ({ products }) => {
       <div className="flex items-center justify-between">
         <h1 className={`${playfair.className} text-center text-3xl md:text-4xl font-semibold mb-10`}>
           Our Products
+          <div className="w-20 h-0.5 bg-black mt-4"></div>
         </h1>
       </div>
 

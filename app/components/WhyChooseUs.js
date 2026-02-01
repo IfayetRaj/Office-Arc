@@ -44,7 +44,7 @@ const WhyChooseUs = () => {
               Why Businesses Choose OfficeArc
             </h2>
           </Animated>
-          <div className="w-20 h-[2px] bg-black mx-auto mt-4"></div>
+          <div className="w-20 h-0.5 bg-black mx-auto mt-4"></div>
         </div>
 
         {/* Feature Grid */}

@@ -13,11 +13,11 @@ const Navbar = () => {
   // Get current route (for active link styling)
   const pathname = usePathname();
   // Handel Search
-  const handleSearch = (e) =>{
+  const handleSearch = (e) => {
     const value = e.target.value;
     setSearchTerm(value);
-    console.log(value)
-  }
+    console.log(value);
+  };
 
   // Mobile drawer open / close state
   const [isOpen, setIsOpen] = useState(false);
@@ -60,26 +60,15 @@ const Navbar = () => {
           Products
         </Link>
       </li>
-      <li>
-        <Link
-          href="/collections"
-          className={pathname === "/collections" ? "active-link" : ""}
-          onClick={() => setIsOpen(false)}
-        >
-          Collections
-        </Link>
-      </li>
     </>
   );
 
   return (
     <>
       {/* =================== NAVBAR =================== */}
-      <div className="navbar bg-base-100 shadow-sm px-2">
-
+      <div className="navbar bg-base-100 shadow-sm px-2 z-200">
         {/* -------- Left Section -------- */}
         <div className="navbar-start">
-
           {/* Mobile menu button (only visible on mobile) */}
           <button
             onClick={() => setIsOpen(true)}
@@ -108,19 +97,13 @@ const Navbar = () => {
 
         {/* -------- Center Section (Desktop Links) -------- */}
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 gap-2">
-            {links}
-          </ul>
+          <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
         </div>
 
         {/* -------- Right Section -------- */}
         <div className="navbar-end gap-2">
-
           {/* Search bar */}
-          <form
-            onSubmit={handleMenu}
-            className="hidden md:flex w-64"
-          >
+          <form onSubmit={handleMenu} className="hidden md:flex w-64">
             <input
               type="text"
               name="search"
@@ -131,14 +114,33 @@ const Navbar = () => {
           </form>
 
           {/* Cart icon */}
-          <button className="btn btn-ghost btn-circle">
+          <Link href="/cart" className="btn btn-ghost btn-circle">
             <PiShoppingCartLight size={20} />
-          </button>
+          </Link>
 
           {/* Profile icon */}
-          <button className="btn btn-ghost btn-circle">
-            <CgProfile size={20} />
-          </button>
+
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="m-1">
+              <button className="btn btn-ghost btn-circle">
+                <CgProfile size={20} />
+              </button>
+            </div>
+            <ul
+              tabIndex="-1"
+              className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+            >
+              <li>
+                <button>Sign Out</button>
+              </li>
+              <li>
+                <Link href='/dashboard'>Dashboard</Link>
+              </li>
+              <li>
+                <Link href='/admin'>Admin Dashboard</Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -175,9 +177,7 @@ const Navbar = () => {
           </div>
 
           {/* Drawer links */}
-          <ul className="menu p-4 gap-3">
-            {links}
-          </ul>
+          <ul className="menu p-4 gap-3">{links}</ul>
         </div>
       </div>
     </>

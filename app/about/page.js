@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Playfair_Display } from "next/font/google";
 import { FaDraftingCompass, FaCouch, FaTruck } from "react-icons/fa";
+import Animated from "../components/Animated";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -13,11 +14,13 @@ export default function AboutPage() {
       {/* HERO SECTION */}
       <section className="px-6 md:px-16 py-20 bg-gray-50">
         <div className="max-w-5xl mx-auto text-center">
-          <h1
-            className={`${playfair.className} text-4xl md:text-5xl font-bold mb-6`}
-          >
-            Crafting Workspaces That Inspire
-          </h1>
+          <Animated>
+            <h1
+              className={`${playfair.className} text-4xl md:text-5xl font-bold mb-6`}
+            >
+              Crafting Workspaces That Inspire
+            </h1>
+          </Animated>
           <p className="text-gray-600 text-lg leading-relaxed">
             Office Arc designs and builds modern office furniture that blends
             functionality, comfort, and timeless aesthetics.
@@ -25,16 +28,15 @@ export default function AboutPage() {
         </div>
       </section>
 
-    {/* WHO WE ARE SECTION */}
+      {/* WHO WE ARE SECTION */}
       <section className="px-6 md:px-16 py-20">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <h2
-              className={`${playfair.className} text-3xl font-bold mb-4`}
-            >
+            <h2 className={`${playfair.className} text-3xl font-bold mb-4`}>
               Who We Are
+            <div className="w-20 h-0.5 bg-black mt-4"></div>
             </h2>
-            <p className="text-gray-600 leading-relaxed mb-4">
+            <p className="text-gray-600 leading-relaxed my-4">
               Office Arc is a design-driven furniture studio specializing in
               premium office solutions. We believe a workspace should not only
               look good but also enhance productivity and well-being.
@@ -57,15 +59,15 @@ export default function AboutPage() {
         </div>
       </section>
 
-    {/* WHAT WE DO SECTION */}
+      {/* WHAT WE DO SECTION */}
       <section className="px-6 md:px-16 py-20 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <h2
             className={`${playfair.className} text-3xl font-bold text-center mb-12`}
           >
             What We Do
+          <div className="w-20 h-0.5 bg-black mx-auto mt-4"></div>
           </h2>
-
           <div className="grid md:grid-cols-3 gap-8">
             <Feature
               icon={<FaDraftingCompass />}
@@ -86,13 +88,12 @@ export default function AboutPage() {
         </div>
       </section>
 
-    {/* WHY OFFICE ARC SECTION */}
+      {/* WHY OFFICE ARC SECTION */}
       <section className="px-6 md:px-16 py-20">
         <div className="max-w-5xl mx-auto text-center">
-          <h2
-            className={`${playfair.className} text-3xl font-bold mb-6`}
-          >
+          <h2 className={`${playfair.className} text-3xl font-bold mb-6`}>
             Why Office Arc?
+            <div className="w-20 h-0.5 bg-black mx-auto mt-4"></div>
           </h2>
           <p className="text-gray-600 leading-relaxed">
             We focus on quality over quantity. Every piece we create is built
@@ -102,13 +103,14 @@ export default function AboutPage() {
         </div>
       </section>
 
-    {/* PRODUCTS */}
+      {/* PRODUCTS */}
       <section className="px-6 md:px-16 py-20 bg-black text-white">
         <div className="max-w-6xl mx-auto">
           <h2
             className={`${playfair.className} text-3xl font-bold text-center mb-12`}
           >
             Our Process
+            <div className="w-20 h-0.5 bg-white mx-auto mt-4"></div>
           </h2>
 
           <div className="grid md:grid-cols-4 gap-6 text-center">
@@ -120,12 +122,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-    {/* CALL TO ACTION */}
+      {/* CALL TO ACTION */}
       <section className="px-6 md:px-16 py-20 text-center">
-        <h2
-          className={`${playfair.className} text-3xl font-bold mb-6`}
-        >
+        <h2 className={`${playfair.className} text-3xl font-bold mb-6`}>
           Let’s Build Your Workspace
+          <div className="w-20 h-0.5 bg-black mx-auto mt-4"></div>
         </h2>
         <p className="text-gray-600 mb-8">
           Have a project in mind? Let’s turn your ideas into reality.
@@ -146,9 +147,7 @@ export default function AboutPage() {
 function Feature({ icon, title, desc }) {
   return (
     <div className="bg-white p-8 rounded-xl shadow-sm text-center">
-      <div className="text-3xl mb-4 text-black mx-auto w-fit">
-        {icon}
-      </div>
+      <div className="text-3xl mb-4 text-black mx-auto w-fit">{icon}</div>
       <h3 className="font-semibold mb-2">{title}</h3>
       <p className="text-sm text-gray-600">{desc}</p>
     </div>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { playfair } from "../layout";
 import Animated from "./Animated";
+import Link from "next/link";
 
 const Categories = () => {
   const data = [
@@ -50,11 +51,12 @@ const Categories = () => {
         <div className="flex-1">
           <Animated>
             <h1
-              className={`${playfair.className} text-4xl md:text-5xl font-semibold underline underline-offset-8`}
+              className={`${playfair.className} text-4xl md:text-5xl font-semibold underline-offset-8`}
             >
               Our Ranges
             </h1>
           </Animated>
+          <div className="w-20 h-0.5 bg-black  mt-4"></div>
         </div>
 
         <p className="flex-1 text-gray-700 mt-4 md:mt-0 leading-relaxed">
@@ -70,30 +72,32 @@ const Categories = () => {
       {/* Categories Grid */}
       <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6">
         {data.map((item) => (
-          <div
-            key={item.id}
-            className="group rounded-xl bg-gray-100/60 p-6 shadow-md transition-all duration-300
+          <Link href={`/collections/${item.name}`}  key={item.id}>
+            <div
+             
+              className="group rounded-xl bg-gray-100/60 p-6 shadow-md transition-all duration-300
                        hover:-translate-y-2 hover:shadow-xl hover:bg-gray-100"
-          >
-            {/* Image wrapper */}
-            <div className="relative w-full aspect-square">
-              <Image
-                src={item.imageUrl}
-                alt={item.name}
-                fill
-                className="object-contain"
-              />
+            >
+              {/* Image wrapper */}
+              <div className="relative w-full aspect-square">
+                <Image
+                  src={item.imageUrl}
+                  alt={item.name}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+
+              {/* Title */}
+              <h2 className="mt-6 text-center font-semibold tracking-wide">
+                {item.name}
+              </h2>
+
+              <p className="mt-2 text-center text-sm text-gray-600 max-w-45 mx-auto">
+                {item.p}
+              </p>
             </div>
-
-            {/* Title */}
-            <h2 className="mt-6 text-center font-semibold tracking-wide">
-              {item.name}
-            </h2>
-
-            <p className="mt-2 text-center text-sm text-gray-600 max-w-45 mx-auto">
-              {item.p}
-            </p>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
