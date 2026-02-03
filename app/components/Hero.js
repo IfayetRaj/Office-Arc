@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { playfair } from "../layout";
 import Animated from "./Animated";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -35,9 +36,9 @@ const Hero = () => {
         </p>
 
         <div className="mt-8 flex gap-4">
-          <button className="px-6 py-3 bg-white text-black font-medium rounded-sm hover:bg-gray-100 transition active:scale-95">
+          <Link href='/collections/all' className="px-6 py-3 bg-white text-black font-medium rounded-sm hover:bg-gray-100 transition active:scale-95">
             Explore Collection
-          </button>
+          </Link>
         </div>
       </div>
     </div>

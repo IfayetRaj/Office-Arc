@@ -34,7 +34,7 @@ const Categories = () => {
       id: 5,
       name: "Workstations",
       imageUrl: "/workstation.webp",
-      p: "Modular workstations to maximize productivity and space",
+      p: "Modular workstations to maximize productivity",
     },
     {
       id: 6,

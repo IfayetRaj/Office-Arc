@@ -29,7 +29,7 @@ const Products = ({ products }) => {
             {/* Image */}
             <div className="relative aspect-4/3 overflow-hidden">
               <Image
-                src={item.image}
+                src={item.images[0]}
                 alt={item.name}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"

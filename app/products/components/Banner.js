@@ -1,7 +1,7 @@
+
 import Animated from "@/app/components/Animated";
 import Image from "next/image";
 import React from "react";
-import { playfair } from "@/app/layout";
 
 const Banner = () => {
   return (
@@ -21,8 +21,9 @@ const Banner = () => {
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-6">
         <Animated>
+          {/* ${playfair.className} */}
           <h1
-            className={`${playfair.className} text-4xl md:text-6xl font-semibold tracking-tight text-white mb-4`}
+            className={` text-4xl md:text-6xl font-semibold tracking-tight text-white mb-4`}
           >
             All Office Furniture
           </h1>

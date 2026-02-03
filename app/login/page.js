@@ -1,55 +1,106 @@
-"use client"
+"use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 import { Playfair_Display } from "next/font/google";
+import api from "@/lib/axios";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
+// font
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
 
-const playfair = Playfair_Display({ subsets: ["latin"], weight: ["400", "700"] });
+const Page = () => {
+  const {setUser} = useAuth();
+  const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
+    if (password !== confirmPassword) {
+      // alert("Password did not matched!");
+      Swal.fire({
+        title: "Password did not matched!",
+        icon: "error",
+        draggable: true,
+        iconColor: "black",
+        toast: true,
+      });
+      return;
+    }
+    const formData = {
+      email,
+      password,
+    };
 
-const page = () => {
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        const form = e.target;
-        const email = form.email.value;
-        const password = form.password.value;
-        const confirmPassword = form.confirmPassword.value;
-        if(password !== confirmPassword){
-            // alert("Password did not matched!");
-            Swal.fire({
-                title: "Password did not matched!",
-                icon: "error",
-                draggable: true,
-                iconColor: "black",
-                toast: true
-              });
-            return;
-        }
-
-
-        console.log( email, password, confirmPassword);
-        e.target.reset();
+    try {
+      // fetch api
+      setLoading(true);
+      const res = await api.post("/auth/login", formData);
+      setLoading(false);
+      if (res.status === 200) {
+        Swal.fire({
+          title: "Logged successfully",
+          icon: "success",
+          draggable: true,
+          iconColor: "black",
+          toast: true,
+        });
+        setUser(res.data.user);
+        router.push("/");
+      } else {
+        Swal.fire({
+          title: res.message,
+          icon: "error",
+          draggable: true,
+          iconColor: "black",
+          toast: true,
+        });
+      }
+    } catch (err) {
+      setLoading(false);
+      Swal.fire({
+        title: "Something went wrong!",
+        icon: "error",
+        draggable: true,
+        iconColor: "black",
+        toast: true,
+      });
     }
 
-    const handleGoogleSignIn = () => {
-        console.log("hi google");
-    }
+    console.log(email, password, confirmPassword);
+    e.target.reset();
+  };
 
+  const handleGoogleSignIn = () => {
+    console.log("hi google");
+  };
 
   return (
     <div className="flex h-screen items-center justify-center bg-gray-50 md:p-7">
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full max-w-md p-8 bg-white rounded-2xl  shadow-xl border border-gray-200">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col gap-4 w-full max-w-md p-8 bg-white rounded-2xl  shadow-xl border border-gray-200"
+      >
         {/* Heading */}
         <div className="mb-2 text-center">
-          <h1 className={`${playfair.className} text-4xl md:text-5xl font-semibold text-gray-900`}>
+          <h1
+            className={`${playfair.className} text-4xl md:text-5xl font-semibold text-gray-900`}
+          >
             Office Arc
           </h1>
           <h2 className="text-gray-500 mt-2 text-lg">Create Account</h2>
         </div>
 
         {/* Inputs */}
-        
+
         <div className="flex flex-col gap-2">
           <label className="text-gray-600 font-medium">Email</label>
           <input
@@ -59,8 +110,6 @@ const page = () => {
             className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-black/40 transition"
           />
         </div>
-
-       
 
         <div className="flex flex-col gap-2">
           <label className="text-gray-600 font-medium">Password</label>
@@ -84,16 +133,28 @@ const page = () => {
 
         {/* Submit */}
         <input
+          disabled={loading}
           type="submit"
-          value="Register"
+          value={loading ? "Logging in..." : "Login"}
           className="mt-4 w-full py-3 bg-black text-white rounded-lg font-medium cursor-pointer hover:bg-gray-900 active:scale-95 transition"
         />
-        <button onClick={handleGoogleSignIn} className=" w-full py-3 bg-black text-white rounded-lg font-medium cursor-pointer hover:bg-gray-900 active:scale-95 transition flex items-center justify-center gap-3"><FcGoogle size={20}/>Login with Google</button>
-        
-        <p>Do not have an account? <Link href='/register' className="text-blue-400 underline">Register</Link></p>
+        <button
+          onClick={handleGoogleSignIn}
+          className=" w-full py-3 bg-black text-white rounded-lg font-medium cursor-pointer hover:bg-gray-900 active:scale-95 transition flex items-center justify-center gap-3"
+        >
+          <FcGoogle size={20} />
+          Login with Google
+        </button>
+
+        <p>
+          Do not have an account?{" "}
+          <Link href="/register" className="text-blue-400 underline">
+            Register
+          </Link>
+        </p>
       </form>
     </div>
   );
 };
 
-export default page;
+export default Page;

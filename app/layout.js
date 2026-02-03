@@ -2,6 +2,7 @@ import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -21,13 +22,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.className} data-theme="light">
       <body className={`antialiased`}>
-        <nav>
-          <Navbar></Navbar>
-        </nav>
-        {children}
-        <footer>
-          <Footer></Footer>
-        </footer>
+        <AuthProvider>
+          <nav>
+            <Navbar></Navbar>
+          </nav>
+          {children}
+          <footer>
+            <Footer></Footer>
+          </footer>
+        </AuthProvider>
       </body>
     </html>
   );
